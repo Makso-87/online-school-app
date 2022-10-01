@@ -1,0 +1,50 @@
+@import "../../css/styleVariables";
+
+.UserItemPage {
+  padding: 50px 0 50px;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  .Avatar {
+    margin: 0 0 30px;
+
+    figure {
+      margin: 0;
+
+      .ImgContainer {
+        background: url("../../images/account-default-photo.svg") no-repeat
+          center / contain;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        .Img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background: no-repeat / center;
+        }
+      }
+    }
+  }
+
+  .Field {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 0 20px;
+    display: flex;
+
+    .Key {
+      margin: 0 5px 0 0;
+    }
+
+    .Value {
+    }
+  }
+
+  .FirstName {
+  }
+}

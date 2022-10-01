@@ -1,0 +1,103 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    createUser(input: CreateUserInput!): User!
+    deleteUsers(input: UserDeleteInput!): [String!]!
+    signIn(input: UserSignInInput!): User!
+    signOut: Boolean!
+}
+
+type Query {
+    me: User!
+    user(input: UserInput!): User!
+    userTypes: [UserType!]!
+    users: [User!]!
+    usersByType(input: UserByTypeInput!): [User!]!
+    validateToken(input: TokenInput!): Token
+}
+
+type Role {
+    code: String!
+    createdAt: DateTime!
+    deletedAt: DateTime!
+    id: String!
+    updatedAt: DateTime!
+    users: User!
+}
+
+type Token {
+    createdAt: DateTime!
+    deletedAt: DateTime!
+    hash: String!
+    id: String!
+    updatedAt: DateTime!
+    user: User!
+}
+
+type User {
+    avatar: String!
+    createdAt: DateTime!
+    deletedAt: DateTime!
+    email: String!
+    firstName: String!
+    id: String!
+    lastName: String!
+    middleName: String!
+    password: String!
+    phoneNumber: String!
+    roles: [Role!]!
+    token: Token!
+    type: String!
+    updatedAt: DateTime!
+}
+
+type UserType {
+    createdAt: DateTime!
+    deletedAt: DateTime!
+    id: String!
+    name: String!
+    updatedAt: DateTime!
+}
+
+"The javascript `Date` as string. Type represents date and time as the ISO Date string."
+scalar DateTime
+
+input CreateUserInput {
+    email: String!
+    firstName: String = ""
+    lastName: String = ""
+    middleName: String = ""
+    password: String!
+    roles: [String!]!
+    type: String!
+}
+
+input TokenInput {
+    createdAt: DateTime
+    deletedAt: DateTime
+    hash: String
+    id: String
+    updatedAt: DateTime
+}
+
+input UserByTypeInput {
+    type: String = ""
+}
+
+input UserDeleteInput {
+    ids: [String!]!
+}
+
+input UserInput {
+    id: String = ""
+}
+
+input UserSignInInput {
+    email: String!
+    password: String!
+}

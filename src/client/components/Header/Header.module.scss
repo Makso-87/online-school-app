@@ -1,0 +1,20 @@
+.Header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 120px;
+  flex-shrink: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 4px 20px rgba(52, 65, 96, 0.1);
+  z-index: 2;
+  background: #ffffff;
+
+  .AccountData {
+    margin: 0 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+}

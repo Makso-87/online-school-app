@@ -1,0 +1,19 @@
+@import "../../css/styleVariables";
+
+.TeachersPage {
+  padding: 50px 0 50px;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  .Button {
+    @include button;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  h1 {
+    margin: 0 0 30px;
+  }
+}

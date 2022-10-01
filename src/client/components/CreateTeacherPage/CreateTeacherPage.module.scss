@@ -1,0 +1,31 @@
+@import "../../css/styleVariables";
+
+.CreateTeacherPage {
+  padding: 50px 0 50px;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  .Error {
+    color: red;
+    margin: 10px 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+
+    input {
+      margin: 0 0 30px;
+    }
+
+    label {
+      font-size: 20px;
+      line-height: 30px;
+      margin: 0 0 20px;
+    }
+  }
+}

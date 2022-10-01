@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Основные стили сайта
+   ========================================================================== */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #3c3c3c;
+  background: #fcfcfc;
+  height: 100%;
+}
+html.fancybox-lock {
+  overflow: visible !important;
+}
+html.fancybox-lock body {
+  position: relative;
+}
+a {
+  color: #3c3c3c;
+  outline: none;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+a img {
+  border: none;
+}
+img {
+  vertical-align: middle;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0 none;
+  border-top: 1px solid #ccc;
+  margin: 0;
+  padding: 0;
+}
+p {
+  margin: 15px 0;
+  padding: 0;
+}
+h1 {
+  font-size: 36px;
+  line-height: 42px;
+  color: #3c3c3c;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h2 {
+  font-size: 24px;
+  line-height: 30px;
+  color: #3c3c3c;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h3 {
+  font-size: 18px;
+  line-height: 24px;
+  color: #3c3c3c;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+ul {
+  margin: 25px 0 25px 30px;
+  padding: 0;
+  list-style-type: disc;
+}
+ol {
+  margin: 25px 0 25px 30px;
+  padding: 0;
+  list-style-type: decimal;
+}
+ol li,
+ul li {
+  margin: 0;
+  padding: 0;
+}
+ol ol,
+ul ul {
+  margin: 6px 0 6px 30px;
+}
+form {
+  margin: 0;
+  padding: 0;
+}
+button,
+input,
+select,
+textarea {
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+}
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+table {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-collapse: collapse;
+}
+table td,
+table th {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-collapse: collapse;
+  text-align: left;
+  vertical-align: top;
+  font-weight: normal;
+}
+body.site-lock {
+  overflow: hidden;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.transition,
+.transition * {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.enter-active {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.enter-done {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
+   Основное
+   ========================================================================== */
+
+#root {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+body.site-lock {
+  overflow: hidden;
+}
+main {
+  min-height: 100%;
+  min-width: 990px;
+  position: relative;
+  padding: 100px 0 0 120px;
+}
+main.auth-true {
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+.clear.clear-footer {
+  height: 100px;
+}
+.site-wrap {
+  width: 100%;
+  min-width: 990px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ==========================================================================
+   Вспомогательные стили
+   ========================================================================== */
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+.invisible {
+  visibility: hidden;
+}
+::-ms-reveal {
+  display: none;
+}
+
+/* ==========================================================================
+   Стили для печати
+   ========================================================================== */
+
+@media print {
+  *,
+  *:before,
+  *:after,
+  *:first-letter,
+  *:first-line {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

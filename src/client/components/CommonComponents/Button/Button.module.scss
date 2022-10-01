@@ -1,0 +1,5 @@
+@import "../../../css/styleVariables";
+
+.Button {
+  @include button;
+}

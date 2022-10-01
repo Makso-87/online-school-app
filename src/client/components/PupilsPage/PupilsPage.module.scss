@@ -1,0 +1,13 @@
+@import "../../css/styleVariables";
+
+.PupilsPage {
+  position: relative;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  h1 {
+    margin: 0 0 30px;
+  }
+}

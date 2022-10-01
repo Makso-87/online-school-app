@@ -1,0 +1,39 @@
+@mixin site-wrap {
+  width: 100%;
+  min-width: 990px;
+  //max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+@mixin transition {
+  transition: all 0.2s ease-out;
+}
+
+@mixin first-and-last-margin-remove {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin button {
+  width: auto;
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #fff;
+  background: #647db7;
+  box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
+  border-radius: 5px;
+  padding: 15px 40px;
+  @include transition;
+
+  &:hover {
+    background: #8599c7;
+  }
+}
