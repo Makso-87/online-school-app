@@ -164,6 +164,14 @@ body.site-lock {
   flex-direction: column;
 }
 
+.loader-container {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
 body.site-lock {
   overflow: hidden;
 }

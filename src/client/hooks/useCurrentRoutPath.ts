@@ -1,3 +1,6 @@
+import { useLocation } from "react-router-dom";
+
 export const useCurrentRoutPath = () => {
-  return window.location.pathname;
+  const { pathname } = useLocation();
+  return pathname;
 };

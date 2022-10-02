@@ -5,7 +5,7 @@ import { signOutUser } from "../../graphql/mutations/signOutUser";
 import AuthStore from "../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import { removeCookie } from "../../helpers/cookies";
-import { Avatar } from "./Avatar/Avatar";
+import { AccountData } from "./AccountData/AccountData";
 import PageStore from "../../store/pageStore";
 import { observer } from "mobx-react";
 
@@ -28,8 +28,10 @@ export const Header = observer(() => {
     <header className={classes.Header}>
       <h1>{currentPage.title}</h1>
       <div className={classes.AccountData}>
-        <Avatar />
-        <button onClick={onLogoutClick}>Log out</button>
+        <AccountData />
+        <button onClick={onLogoutClick} className={classes.LogOut}>
+          Выйти
+        </button>
       </div>
     </header>
   );

@@ -10,18 +10,22 @@ export const Input = (props: InputInterface) => {
     name = "",
     onInput = () => {},
     onChange = () => {},
+    label = "",
   } = props;
 
   return (
-    <input
-      id={id}
-      onInput={onInput}
-      onChange={onChange}
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      className={classes.Input}
-      name={name}
-    />
+    <div className={classes.Input}>
+      {label !== "" ? <label htmlFor={id}>{label}</label> : null}
+
+      <input
+        id={id}
+        onInput={onInput}
+        onChange={onChange}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        name={name}
+      />
+    </div>
   );
 };

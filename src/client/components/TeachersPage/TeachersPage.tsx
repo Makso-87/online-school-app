@@ -3,8 +3,9 @@ import { UsersList } from "../CommonComponents/UsersList/UsersList";
 import UsersStore from "../../store/usersStore";
 import { Link } from "react-router-dom";
 import { useCurrentRoutPath } from "../../hooks/useCurrentRoutPath";
+import { observer } from "mobx-react";
 
-export const TeachersPage = (props) => {
+export const TeachersPage = observer((props) => {
   const { teachers } = UsersStore;
   const path = useCurrentRoutPath();
 
@@ -19,4 +20,4 @@ export const TeachersPage = (props) => {
       </div>
     </div>
   );
-};
+});

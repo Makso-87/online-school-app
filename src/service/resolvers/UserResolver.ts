@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { User } from "../entities/User";
 import {
   CreateUserInput,
+  UpdateUserInput,
   UserByTypeInput,
   UserDeleteInput,
   UserInput,
@@ -98,6 +99,18 @@ export class UserResolver {
     return new ApolloError("User with such email already exists");
   }
 
+  @Authorized()
+  @Mutation(() => User)
+  async updateUser(@Arg("input") input: UpdateUserInput) {
+    const { id, ...rest } = input;
+    const user = await db.manager.findOneBy(User, { id });
+    Object.assign(user, { ...rest });
+
+    await db.manager.save(User, user);
+
+    return user;
+  }
+
   @Mutation(() => User)
   async signIn(
     @Arg("input") input: UserSignInInput,
@@ -148,6 +161,7 @@ export class UserResolver {
     return false;
   }
 
+  @Authorized(["admin", "teacher", "moderator"])
   @Mutation(() => [String])
   async deleteUsers(@Arg("input") input: UserDeleteInput) {
     const { ids } = input;

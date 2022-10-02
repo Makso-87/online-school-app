@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { AdminPanel } from "../pages/adminPanel/AdminPanel";
 import { useEffect } from "react";
 import { Layout } from "../components/Layout/Layout";
@@ -7,12 +7,15 @@ import { Pupils } from "../pages/pupils/Pupils";
 import { Parents } from "../pages/parents/Parents";
 import { CreateTeacher } from "../pages/teachers/createTeacher/CreateTeacher";
 import { Teacher } from "../pages/teachers/teacher/Teacher";
+import { Profile } from "../pages/profile/Profile";
 
 export const AdminRoutes = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    navigate("/admin");
+    const path = pathname === "/" ? "/admin" : pathname;
+    navigate(path, { replace: true });
   }, []);
 
   return (
@@ -20,6 +23,7 @@ export const AdminRoutes = () => {
       <Route path="/" element={<Layout />}>
         <Route path="admin" element={<AdminPanel />} />
         <Route path="admin/teachers" element={<Teachers />} />
+        <Route path="admin/profile" element={<Profile />} />
         <Route
           path="admin/teachers/createTeacher"
           element={<CreateTeacher />}

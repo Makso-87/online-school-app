@@ -1,4 +1,8 @@
 .Avatar {
+  a {
+    text-decoration: none;
+    display: block;
+  }
   figure {
     display: flex;
     align-items: center;
@@ -7,7 +11,7 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      border: 2px solid red;
+      border: 2px solid #ff9776;
       overflow: hidden;
 
       .Img {
@@ -27,7 +31,10 @@
         border-radius: 50%;
 
         span {
+          display: inline-block;
           color: #ffffff;
+          font-size: 17px;
+          font-weight: 500;
         }
       }
     }
@@ -38,9 +45,19 @@
       .Name {
         font-size: 20px;
         line-height: 20px;
+        margin: 0 0 5px;
+
+        span {
+          margin: 0 5px 0 0;
+
+          &:last-child {
+            margin: 0;
+          }
+        }
       }
 
       .Email {
+        color: #919191;
         font-size: 15px;
         line-height: 15px;
       }

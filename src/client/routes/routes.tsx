@@ -15,6 +15,7 @@ const routesMapping = {
 
 export const useRoutes = (isAuthenticated: boolean) => {
   const { type }: { type: string } = UserStore;
+
   if (isAuthenticated) {
     return routesMapping[type as keyof typeof routesMapping]();
   }
@@ -22,6 +23,7 @@ export const useRoutes = (isAuthenticated: boolean) => {
   return (
     <Routes>
       <Route path="/" element={<AuthPage />} />
+      <Route path="*" element={<AuthPage />} />
     </Routes>
   );
 };

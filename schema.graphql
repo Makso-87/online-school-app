@@ -10,6 +10,7 @@ type Mutation {
     deleteUsers(input: UserDeleteInput!): [String!]!
     signIn(input: UserSignInInput!): User!
     signOut: Boolean!
+    updateUser(input: UpdateUserInput!): User!
 }
 
 type Query {
@@ -83,6 +84,15 @@ input TokenInput {
     hash: String
     id: String
     updatedAt: DateTime
+}
+
+input UpdateUserInput {
+    avatar: String = ""
+    firstName: String = ""
+    id: String = ""
+    lastName: String = ""
+    middleName: String = ""
+    phoneNumber: String = ""
 }
 
 input UserByTypeInput {

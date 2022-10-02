@@ -2,4 +2,10 @@
 
 .Button {
   @include button;
+
+  &.Disabled {
+    background: #dbdbdb;
+    color: #858585;
+    box-shadow: none;
+  }
 }

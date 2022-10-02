@@ -1,3 +1,5 @@
+@import "../../css/styleVariables";
+
 .Header {
   position: fixed;
   top: 0;
@@ -16,5 +18,13 @@
     margin: 0 0 0 auto;
     display: flex;
     align-items: center;
+  }
+
+  .LogOut {
+    @include button;
+    box-shadow: none;
+    font-size: 15px;
+    padding: 5px 15px;
+    font-weight: 500;
   }
 }

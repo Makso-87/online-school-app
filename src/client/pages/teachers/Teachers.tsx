@@ -9,14 +9,18 @@ export const Teachers = () => {
   const { setCurrentPage } = PageStore;
 
   useEffect(() => {
+    const { teachers } = UsersStore;
     setCurrentPage({ slug: "teachers", title: "Учители" });
-    graphQLClient
-      .request(usersByType, {
-        input: { type: "teacher" },
-      })
-      .then(({ usersByType: users }) => {
-        UsersStore.setTeachers(users);
-      });
+
+    if (!teachers.length) {
+      graphQLClient
+        .request(usersByType, {
+          input: { type: "teacher" },
+        })
+        .then(({ usersByType: users }) => {
+          UsersStore.setTeachers(users);
+        });
+    }
   }, []);
 
   return <TeachersPage />;

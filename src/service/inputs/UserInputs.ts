@@ -43,6 +43,31 @@ export class CreateUserInput {
 }
 
 @InputType()
+export class UpdateUserInput {
+  @IsNotEmpty()
+  @Field(() => String, { defaultValue: "" })
+  id!: string;
+
+  @Field()
+  avatar: string = "";
+
+  @Length(0, 60)
+  @Field()
+  firstName: string = "";
+
+  @Length(0, 60)
+  @Field()
+  lastName: string = "";
+
+  @Length(0, 60)
+  @Field()
+  middleName: string = "";
+
+  @Field()
+  phoneNumber: string = "";
+}
+
+@InputType()
 export class UserCheckEmailInput {
   @IsNotEmpty()
   @IsEmail()

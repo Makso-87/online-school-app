@@ -3,6 +3,8 @@ import classes from "./UserItemPage.module.scss";
 import UsersStore from "../../store/usersStore";
 import PageStore from "../../store/pageStore";
 import { UserData } from "../../store/userStore";
+import { Avatar } from "../CommonComponents/Avatar/Avatar";
+import { Field } from "../CommonComponents/Field/Field";
 
 export const UserItemPage = () => {
   const { id } = useParams();
@@ -18,6 +20,7 @@ export const UserItemPage = () => {
     firstName = "",
     lastName = "",
     middleName = "",
+    phoneNumber = "",
   } = currentUser || {};
 
   console.log("page", currentPage);
@@ -25,41 +28,15 @@ export const UserItemPage = () => {
   return (
     <div className={classes.UserItemPage}>
       <div className={classes.SiteWrap}>
-        <div className={classes.Avatar}>
-          <figure>
-            <div className={classes.ImgContainer}>
-              <div
-                className={classes.Img}
-                style={{ backgroundImage: `url(${avatar})` }}
-              />
-            </div>
-          </figure>
-        </div>
+        <Avatar img={avatar} />
 
-        <div className={classes.Field}>
-          <div className={classes.Key}>ID:</div>
-          <div className={classes.Value}>{id}</div>
-        </div>
+        {/*<Field name="ID" value={id} />*/}
 
-        <div className={classes.Field}>
-          <div className={classes.Key}>E-mail:</div>
-          <div className={classes.Value}>{email}</div>
-        </div>
-
-        <div className={classes.Field}>
-          <div className={classes.Key}>Имя:</div>
-          <div className={classes.Value}>{firstName}</div>
-        </div>
-
-        <div className={classes.Field}>
-          <div className={classes.Key}>Фамилия:</div>
-          <div className={classes.Value}>{lastName}</div>
-        </div>
-
-        <div className={classes.Field}>
-          <div className={classes.Key}>Отчество:</div>
-          <div className={classes.Value}>{middleName}</div>
-        </div>
+        <Field name="E-mail" value={email} />
+        <Field name="Имя" value={firstName} />
+        <Field name="Фамилия" value={lastName} />
+        <Field name="Отчество" value={middleName} />
+        <Field name="Номер телефона" value={phoneNumber} />
       </div>
     </div>
   );

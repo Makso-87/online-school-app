@@ -1,5 +1,6 @@
 export interface ButtonInterface {
   text: string;
+  disabled?: boolean;
   onClick: () =>
     | any
     | ((FormEvent) => Promise<void>)
@@ -14,4 +15,10 @@ export interface InputInterface {
   placeholder?: string;
   onInput?: (any) => void;
   onChange?: (any) => void;
+  label?: string;
+}
+
+export interface FieldInterface {
+  name: string;
+  value: string;
 }
