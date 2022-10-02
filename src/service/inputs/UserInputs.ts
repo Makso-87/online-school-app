@@ -68,6 +68,19 @@ export class UpdateUserInput {
 }
 
 @InputType()
+export class UpdateUserPasswordInput {
+  @IsNotEmpty()
+  @Field(() => String, { defaultValue: "" })
+  id!: string;
+
+  @Field(() => String)
+  currentPassword!: string;
+
+  @Field(() => String)
+  newPassword!: string;
+}
+
+@InputType()
 export class UserCheckEmailInput {
   @IsNotEmpty()
   @IsEmail()

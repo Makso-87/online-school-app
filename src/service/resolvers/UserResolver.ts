@@ -4,6 +4,7 @@ import { User } from "../entities/User";
 import {
   CreateUserInput,
   UpdateUserInput,
+  UpdateUserPasswordInput,
   UserByTypeInput,
   UserDeleteInput,
   UserInput,
@@ -109,6 +110,25 @@ export class UserResolver {
     await db.manager.save(User, user);
 
     return user;
+  }
+
+  @Authorized()
+  @Mutation(() => User)
+  async updateUserPassword(@Arg("input") input: UpdateUserPasswordInput) {
+    const { id, currentPassword, newPassword } = input;
+    const user = await db.manager.findOneBy(User, { id });
+
+    if (await bcrypt.compare(currentPassword, user.password)) {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      Object.assign(user, { password: hashedPassword });
+
+      await db.manager.save(User, user);
+
+      return user;
+    }
+
+    throw new ApolloError("Wrong user password");
   }
 
   @Mutation(() => User)
