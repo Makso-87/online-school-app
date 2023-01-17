@@ -1,6 +1,6 @@
-import { Arg, Authorized, Ctx, Mutation, Query } from "type-graphql";
-import bcrypt from "bcrypt";
-import { User } from "../entities/User";
+import { Arg, Authorized, Ctx, Mutation, Query } from 'type-graphql';
+import bcrypt from 'bcryptjs';
+import { User } from '../entities/User';
 import {
   CreateUserInput,
   UpdateUserInput,
@@ -9,14 +9,14 @@ import {
   UserDeleteInput,
   UserInput,
   UserSignInInput,
-} from "../inputs/UserInputs";
-import { db } from "../middlewares/db";
-import { In } from "typeorm";
-import { Role } from "../entities/Role";
-import type { GraphqlContext } from "../graphql";
-import { Token } from "../entities/Token";
-import { ApolloError } from "apollo-server-express";
-import { sendMail } from "../helpers/sendMail";
+} from '../inputs/UserInputs';
+import { db } from '../middlewares/db';
+import { In } from 'typeorm';
+import { Role } from '../entities/Role';
+import type { GraphqlContext } from '../graphql';
+import { Token } from '../entities/Token';
+import { ApolloError } from 'apollo-server-express';
+import { sendMail } from '../helpers/sendMail';
 
 export class UserResolver {
   @Authorized()
@@ -44,7 +44,7 @@ export class UserResolver {
 
   @Authorized()
   @Query(() => [User])
-  async usersByType(@Arg("input") input: UserByTypeInput) {
+  async usersByType(@Arg('input') input: UserByTypeInput) {
     const { type } = input;
     return await db.manager.find(User, {
       where: {
@@ -55,7 +55,7 @@ export class UserResolver {
 
   @Authorized()
   @Query(() => User)
-  async user(@Arg("input") input: UserInput) {
+  async user(@Arg('input') input: UserInput) {
     const { id } = input;
     return await db.manager.find(User, {
       where: {
@@ -64,9 +64,9 @@ export class UserResolver {
     });
   }
 
-  @Authorized(["admin", "moderator", "teacher"])
+  @Authorized(['admin', 'moderator', 'teacher'])
   @Mutation(() => User)
-  async createUser(@Arg("input") input: CreateUserInput) {
+  async createUser(@Arg('input') input: CreateUserInput) {
     const { email, password, roles, type } = input;
     const existUser = await db.manager.findOneBy(User, { email });
 
@@ -97,12 +97,12 @@ export class UserResolver {
       }
     }
 
-    return new ApolloError("User with such email already exists");
+    return new ApolloError('User with such email already exists');
   }
 
   @Authorized()
   @Mutation(() => User)
-  async updateUser(@Arg("input") input: UpdateUserInput) {
+  async updateUser(@Arg('input') input: UpdateUserInput) {
     const { id, ...rest } = input;
     const user = await db.manager.findOneBy(User, { id });
     Object.assign(user, { ...rest });
@@ -114,7 +114,7 @@ export class UserResolver {
 
   @Authorized()
   @Mutation(() => User)
-  async updateUserPassword(@Arg("input") input: UpdateUserPasswordInput) {
+  async updateUserPassword(@Arg('input') input: UpdateUserPasswordInput) {
     const { id, currentPassword, newPassword } = input;
     const user = await db.manager.findOneBy(User, { id });
 
@@ -128,16 +128,13 @@ export class UserResolver {
       return user;
     }
 
-    throw new ApolloError("Wrong user password");
+    throw new ApolloError('Wrong user password');
   }
 
   @Mutation(() => User)
-  async signIn(
-    @Arg("input") input: UserSignInInput,
-    @Ctx() ctx: GraphqlContext
-  ) {
+  async signIn(@Arg('input') input: UserSignInInput, @Ctx() ctx: GraphqlContext) {
     if (ctx.user) {
-      throw new ApolloError("You already logged in!");
+      throw new ApolloError('You already logged in!');
     }
 
     const user = await db.manager.findOne(User, {
@@ -157,7 +154,6 @@ export class UserResolver {
     if (user) {
       if (await bcrypt.compare(input.password, user.password)) {
         const token = db.manager.create(Token, { user: { id: user.id } });
-
         await db.manager.save(Token, token);
 
         user.token = token;
@@ -165,10 +161,10 @@ export class UserResolver {
 
         return user;
       } else {
-        throw new ApolloError("Wrong user password");
+        throw new ApolloError('Wrong user password');
       }
     } else {
-      return new ApolloError("User with such email not found");
+      return new ApolloError('User with such email not found');
     }
   }
 
@@ -181,9 +177,9 @@ export class UserResolver {
     return false;
   }
 
-  @Authorized(["admin", "teacher", "moderator"])
+  @Authorized(['admin', 'teacher', 'moderator'])
   @Mutation(() => [String])
-  async deleteUsers(@Arg("input") input: UserDeleteInput) {
+  async deleteUsers(@Arg('input') input: UserDeleteInput) {
     const { ids } = input;
 
     for (const id of ids) {

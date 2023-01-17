@@ -1,10 +1,16 @@
-@import "../../css/styleVariables";
+@import '../../css/styleVariables';
 
 .ParentsPage {
-  position: relative;
+  padding: 50px 0 50px;
 
   .SiteWrap {
     @include site-wrap;
+  }
+
+  .Button {
+    @include button;
+    text-decoration: none;
+    display: inline-block;
   }
 
   h1 {

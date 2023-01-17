@@ -1,19 +1,18 @@
-import { useState } from "react";
-import { observer } from "mobx-react";
-import classes from "./ProfilePage.module.scss";
-import { Avatar } from "../CommonComponents/Avatar/Avatar";
-import { Input } from "../CommonComponents/Input/Input";
-import UserStore from "../../store/userStore";
-import { Button } from "../CommonComponents/Button/Button";
-import { Field } from "../CommonComponents/Field/Field";
-import { graphQLClient } from "../../helpers/graphQlClient";
-import { updateUser } from "../../graphql/mutations/updateUser";
-import { updateUserPassword } from "../../graphql/mutations/updateUserPassword";
-import { diff } from "deep-object-diff";
+import { useState } from 'react';
+import { observer } from 'mobx-react';
+import classes from './ProfilePage.module.scss';
+import { Avatar } from '../CommonComponents/Avatar/Avatar';
+import { Input } from '../CommonComponents/Input/Input';
+import UserStore from '../../store/userStore';
+import { Button } from '../CommonComponents/Button/Button';
+import { Field } from '../CommonComponents/Field/Field';
+import { graphQLClient } from '../../helpers/graphQlClient';
+import { updateUser } from '../../graphql/mutations/updateUser';
+import { updateUserPassword } from '../../graphql/mutations/updateUserPassword';
+import { diff } from 'deep-object-diff';
 
 export const ProfilePage = observer(() => {
-  const { avatar, email, firstName, lastName, middleName, phoneNumber, id } =
-    UserStore;
+  const { avatar, email, firstName, lastName, middleName, phoneNumber, id } = UserStore;
 
   const [form, setForm] = useState({
     avatar,
@@ -24,8 +23,8 @@ export const ProfilePage = observer(() => {
   });
 
   const [passwordForm, setPasswordForm] = useState({
-    currentPassword: "",
-    newPassword: "",
+    currentPassword: '',
+    newPassword: '',
   });
 
   const [isFormChanged, setIsFormChanged] = useState(false);
@@ -35,10 +34,7 @@ export const ProfilePage = observer(() => {
     const newForm = { ...form, [event.target.name]: event.target.value };
     setForm(newForm);
 
-    const diffResult = diff(
-      { avatar, firstName, lastName, middleName, phoneNumber },
-      newForm
-    );
+    const diffResult = diff({ avatar, firstName, lastName, middleName, phoneNumber }, newForm);
 
     if (Object.keys(diffResult).length) {
       setIsFormChanged(true);
@@ -54,8 +50,8 @@ export const ProfilePage = observer(() => {
     });
 
     if (
-      event.target.value === "" &&
-      (passwordForm.currentPassword === "" || passwordForm.newPassword === "")
+      event.target.value === '' &&
+      (passwordForm.currentPassword === '' || passwordForm.newPassword === '')
     ) {
       setIsFormPasswordChanged(false);
     } else {
@@ -75,7 +71,7 @@ export const ProfilePage = observer(() => {
         setUserData({ ...user, ...updatedUser });
         setIsFormChanged(false);
       })
-      .catch((e) => console.error("[Update user]", e));
+      .catch((e) => console.error('[Update user]', e));
   };
 
   const onSaveNewPassword = (event) => {
@@ -96,87 +92,83 @@ export const ProfilePage = observer(() => {
   return (
     <div className={classes.ProfilePage}>
       <div className={classes.SiteWrap}>
-        <Avatar img={""} allowChange={true} />
+        <Avatar img={avatar} allowChange={true} />
 
         <div className={classes.Forms}>
           <div className={classes.FormContainer}>
-            <form action="#">
-              <Field name="E-mail" value={email} />
+            <form action='#'>
+              <Field name='E-mail' value={email} />
 
               <Input
                 onInput={onInput}
-                type="text"
-                name="firstName"
-                id="firstName"
-                label="Имя"
+                type='text'
+                name='firstName'
+                id='firstName'
+                label='Имя'
                 value={form.firstName}
-                placeholder="Добавьте Ваше имя"
+                placeholder='Добавьте Ваше имя'
               />
 
               <Input
                 onInput={onInput}
-                type="text"
-                name="lastName"
-                id="lastName"
-                label="Фамилия"
+                type='text'
+                name='lastName'
+                id='lastName'
+                label='Фамилия'
                 value={form.lastName}
-                placeholder="Добавьте Вашу фамилию"
+                placeholder='Добавьте Вашу фамилию'
               />
 
               <Input
                 onInput={onInput}
-                type="text"
-                name="middleName"
-                id="middleName"
-                label="Отчество"
+                type='text'
+                name='middleName'
+                id='middleName'
+                label='Отчество'
                 value={form.middleName}
-                placeholder="Добавьте Ваше отчество"
+                placeholder='Добавьте Ваше отчество'
               />
 
               <Input
                 onInput={onInput}
-                type="text"
-                name="phoneNumber"
-                id="phoneNumber"
-                label="Номер телефона"
+                type='text'
+                name='phoneNumber'
+                id='phoneNumber'
+                label='Номер телефона'
                 value={form.phoneNumber}
-                placeholder="Добавьте Ваш номер телефона"
+                placeholder='Добавьте Ваш номер телефона'
               />
 
-              <Button
-                text="Сохранить"
-                onClick={onButtonClick}
-                disabled={!isFormChanged}
-              />
+              <Button text='Сохранить' onClick={onButtonClick} disabled={!isFormChanged} />
             </form>
           </div>
 
           <div className={classes.FormContainer}>
             <h2>Изменить пароль</h2>
 
-            <form action="#">
+            <form action='#'>
               <Input
                 onInput={onPasswordInput}
-                type="password"
-                name="currentPassword"
-                id="currentPassword"
-                label="Введите текущий"
+                type='password'
+                name='currentPassword'
+                id='currentPassword'
+                label='Введите текущий'
                 value={passwordForm.currentPassword}
-                placeholder="Введите текущий пароль"
+                placeholder='Введите текущий пароль'
               />
 
               <Input
                 onInput={onPasswordInput}
-                type="password"
-                name="newPassword"
-                id="newPassword"
-                label="Введите новый"
+                type='password'
+                name='newPassword'
+                id='newPassword'
+                label='Введите новый'
                 value={passwordForm.newPassword}
-                placeholder="Введите новый пароль"
+                placeholder='Введите новый пароль'
               />
 
               <Button
-                text="Сохранить"
+                text='Сохранить'
                 onClick={onSaveNewPassword}
                 disabled={!isFormPasswordChanged}
               />

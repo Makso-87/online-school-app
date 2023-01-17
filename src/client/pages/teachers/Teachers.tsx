@@ -1,21 +1,22 @@
-import { TeachersPage } from "../../components/TeachersPage/TeachersPage";
-import PageStore from "../../store/pageStore";
-import { useEffect } from "react";
-import { graphQLClient } from "../../helpers/graphQlClient";
-import { usersByType } from "../../graphql/queries/usersByType";
-import UsersStore from "../../store/usersStore";
+import { TeachersPage } from '../../components/TeachersPage/TeachersPage';
+import PageStore from '../../store/pageStore';
+import { useEffect } from 'react';
+import { graphQLClient } from '../../helpers/graphQlClient';
+import { usersByType } from '../../graphql/queries/usersByType';
+import UsersStore from '../../store/usersStore';
 
 export const Teachers = () => {
-  const { setCurrentPage } = PageStore;
+  const { setCurrentPage, setCurrentCategory } = PageStore;
 
   useEffect(() => {
     const { teachers } = UsersStore;
-    setCurrentPage({ slug: "teachers", title: "Учители" });
+    setCurrentPage({ slug: 'teachers', title: 'Учители' });
+    setCurrentCategory({ slug: 'teachers', title: 'Учители' });
 
     if (!teachers.length) {
       graphQLClient
         .request(usersByType, {
-          input: { type: "teacher" },
+          input: { type: 'teacher' },
         })
         .then(({ usersByType: users }) => {
           UsersStore.setTeachers(users);

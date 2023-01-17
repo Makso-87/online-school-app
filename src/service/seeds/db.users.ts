@@ -1,12 +1,10 @@
-import { db } from "../middlewares/db";
-import { User } from "../entities/User";
-import { In } from "typeorm";
-import { Role } from "../entities/Role";
-import bcrypt from "bcrypt";
+import { db } from '../middlewares/db';
+import { User } from '../entities/User';
+import { In } from 'typeorm';
+import { Role } from '../entities/Role';
+import bcrypt from 'bcryptjs';
 
-const rows = [
-  { email: "makso16108@gmail.com", password: "123456", type: "admin" },
-];
+const rows = [{ email: 'makso16108@gmail.com', password: '123456', type: 'admin' }];
 
 export const seedUsers = async () => {
   for (const row of rows) {
@@ -15,13 +13,11 @@ export const seedUsers = async () => {
     if (!exist) {
       const roles = await db.manager.find(Role, {
         where: {
-          code: In(["admin"]),
+          code: In(['admin']),
         },
       });
 
-      const hashedPassword = await bcrypt
-        .hash(row.password, 10)
-        .then((hash) => hash);
+      const hashedPassword = await bcrypt.hash(row.password, 10);
 
       const newUser = db.manager.create(User, {
         ...row,

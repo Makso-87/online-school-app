@@ -9,6 +9,7 @@ import { seedUsers } from "./seeds/db.users";
 import { seedTypes } from "./seeds/db.types";
 import { createApolloServer } from "./middlewares/appolo";
 import { attachUser } from "./helpers/attachUser";
+import { s3 } from "./helpers/s3";
 
 (async () => {
   const app = express();
@@ -19,6 +20,25 @@ import { attachUser } from "./helpers/attachUser";
 
   app.get("/", (req, res) => {
     res.send("Hello world!");
+  });
+
+  app.post("/avatar", async (req, res) => {
+    const ddd = await req.body;
+
+    const uploadResult = await s3
+      .upload({
+        // Bucket: "makso-bucket",
+        Bucket: "makso-bucket.s3.amazonaws.com",
+        Key: "test/test.json",
+        // ContentType: "application/json",
+        ACL: "public-read",
+        Body: JSON.stringify({ testKey: "testValue" }),
+      })
+      .promise();
+
+    res.send({
+      payload: uploadResult,
+    });
   });
 
   try {

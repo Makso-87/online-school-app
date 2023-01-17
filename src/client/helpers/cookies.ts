@@ -1,4 +1,4 @@
-import Cookie from "js-cookie";
+import Cookie from 'js-cookie';
 
 export const getCookie = (name: string) => {
   if (name) {
@@ -20,17 +20,13 @@ export const getCookie = (name: string) => {
 
 export const removeCookie = (name: string) => {
   if (name) {
-    Cookie.remove(name, { path: window.location.pathname });
+    Cookie.remove(name);
   }
 };
 
 export const setCookie = (name: string, value: any, expires: any = 14) => {
   if (name && value) {
-    return Cookie.set(
-      name,
-      typeof value === "string" ? value : JSON.stringify(value),
-      { expires }
-    );
+    return Cookie.set(name, typeof value === 'string' ? value : JSON.stringify(value), { expires });
   }
 
   return false;

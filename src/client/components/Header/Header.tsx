@@ -1,13 +1,13 @@
-import React, { FormEvent } from "react";
-import classes from "./Header.module.scss";
-import { graphQLClient } from "../../helpers/graphQlClient";
-import { signOutUser } from "../../graphql/mutations/signOutUser";
-import AuthStore from "../../store/authStore";
-import { useNavigate } from "react-router-dom";
-import { removeCookie } from "../../helpers/cookies";
-import { AccountData } from "./AccountData/AccountData";
-import PageStore from "../../store/pageStore";
-import { observer } from "mobx-react";
+import React, { FormEvent } from 'react';
+import classes from './Header.module.scss';
+import { graphQLClient } from '../../helpers/graphQlClient';
+import { signOutUser } from '../../graphql/mutations/signOutUser';
+import AuthStore from '../../store/authStore';
+import { useNavigate } from 'react-router-dom';
+import { removeCookie } from '../../helpers/cookies';
+import { AccountData } from './AccountData/AccountData';
+import PageStore from '../../store/pageStore';
+import { observer } from 'mobx-react';
 
 export const Header = observer(() => {
   const navigate = useNavigate();
@@ -18,8 +18,9 @@ export const Header = observer(() => {
 
     if (result) {
       AuthStore.logOut();
-      removeCookie("authorization");
-      navigate("/");
+      removeCookie('authorization');
+      navigate('/');
+      window.location.reload();
     }
   };
   const { currentPage } = PageStore;

@@ -1,10 +1,11 @@
 export interface ButtonInterface {
   text: string;
   disabled?: boolean;
-  onClick: () =>
-    | any
+  onClick:
+    | (() => any)
     | ((FormEvent) => Promise<void>)
-    | ((e: any) => Promise<void>);
+    | ((e: any) => Promise<void>)
+    | ((event: any) => void);
 }
 
 export interface InputInterface {

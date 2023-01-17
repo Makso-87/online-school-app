@@ -11,6 +11,7 @@ type Mutation {
     signIn(input: UserSignInInput!): User!
     signOut: Boolean!
     updateUser(input: UpdateUserInput!): User!
+    updateUserPassword(input: UpdateUserPasswordInput!): User!
 }
 
 type Query {
@@ -93,6 +94,12 @@ input UpdateUserInput {
     lastName: String = ""
     middleName: String = ""
     phoneNumber: String = ""
+}
+
+input UpdateUserPasswordInput {
+    currentPassword: String!
+    id: String = ""
+    newPassword: String!
 }
 
 input UserByTypeInput {

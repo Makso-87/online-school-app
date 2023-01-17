@@ -1,3 +1,5 @@
+@import '../../../css/styleVariables';
+
 .Avatar {
   margin: 0 0 30px;
 
@@ -5,8 +7,8 @@
     margin: 0;
 
     .ImgContainer {
-      background: url("../../../images/account-default-photo.svg") no-repeat
-        center / contain;
+      position: relative;
+      background: url('../../../images/account-default-photo.svg') no-repeat center / contain;
       width: 250px;
       height: 250px;
       border-radius: 50%;
@@ -16,7 +18,48 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        background: no-repeat / center;
+        background: no-repeat center / cover;
+      }
+
+      &:hover {
+        .DownloadOverlay {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      .DownloadOverlay {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        @include transition;
+
+        button {
+          border: none;
+          background: none;
+          color: #ffffff;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 30px;
+        }
+
+        input {
+          width: 0;
+          height: 0;
+          opacity: 0;
+          line-height: 0;
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+        }
       }
     }
   }

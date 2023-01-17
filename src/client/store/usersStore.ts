@@ -1,5 +1,5 @@
-import { UserData } from "./userStore";
-import { makeAutoObservable } from "mobx";
+import { UserData } from './userStore';
+import { makeAutoObservable } from 'mobx';
 
 class UsersStore {
   constructor() {
@@ -11,19 +11,19 @@ class UsersStore {
   parents: UserData[] = [];
   admins: UserData[] = [];
 
-  setTeachers = (newTeachers) => {
+  setTeachers = (newTeachers: UserData[]) => {
     this.teachers = [...newTeachers];
   };
 
-  setPupils = (newPupils) => {
+  setPupils = (newPupils: UserData[]) => {
     this.pupils = [...newPupils];
   };
 
-  setParents = (newParents) => {
+  setParents = (newParents: UserData[]) => {
     this.parents = [...newParents];
   };
 
-  setAdmins = (newAdmins) => {
+  setAdmins = (newAdmins: UserData[]) => {
     this.admins = [...newAdmins];
   };
 }
