@@ -12,6 +12,9 @@ import { CreatePupil } from '../pages/pupils/createPupil/CreatePupil';
 import { Pupil } from '../pages/pupils/pupil/Pupil';
 import { CreateParent } from '../pages/parents/createParent/CreateParent';
 import { Parent } from '../pages/parents/parent/Parent';
+import { Diaries } from '../pages/diaries/Diaries';
+import { Diary } from '../pages/diary/Diary';
+import { CreateDiary } from '../pages/diary/createDiary/CreateDiary';
 
 export const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -33,6 +36,9 @@ export const AdminRoutes = () => {
         <Route path='admin/pupils' element={<Pupils />} />
         <Route path='admin/pupils/createPupil' element={<CreatePupil />} />
         <Route path='admin/pupils/pupil/:id' element={<Pupil />} />
+        <Route path='admin/diaries' element={<Diaries />} />
+        <Route path='admin/diaries/diary/:id' element={<Diary />} />
+        <Route path='admin/diaries/createDiary' element={<CreateDiary />} />
         <Route path='admin/parents' element={<Parents />} />
         <Route path='admin/parents/createParent' element={<CreateParent />} />
         <Route path='admin/parents/parent/:id' element={<Parent />} />
