@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noImplicitAny": true,
     "moduleResolution": "node",
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -18,12 +19,12 @@
       {
         "name": "typescript-plugin-css-modules",
         "options": {
-          "classnameTransform": "camelCase",
+          "classnameTransform": "camelCase"
         }
       }
     ]
   },
-  "include": ["*.ts","src/**/*.tsx", "src/**/*.ts", "declaration.d.ts"],
+  "include": ["*.ts", "src/**/*.tsx", "src/**/*.ts", "declaration.d.ts"],
   "exclude": ["node_modules", ".idea"],
   "ts-node": {
     "compilerOptions": {
