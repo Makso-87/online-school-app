@@ -1,4 +1,4 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from 'mobx';
 
 export interface UserData {
   id: string;
@@ -11,19 +11,19 @@ export interface UserData {
   phoneNumber: string;
 }
 
-class UserStore implements UserData {
+class UserStore {
   constructor() {
     makeAutoObservable(this);
   }
 
-  id = "";
-  email = "";
-  firstName = "";
-  middleName = "";
-  lastName = "";
-  type = "";
-  avatar = "";
-  phoneNumber = "";
+  private id = '';
+  private email = '';
+  private firstName = '';
+  private middleName = '';
+  private lastName = '';
+  private type = '';
+  private avatar = '';
+  private phoneNumber = '';
 
   setUserData = (userData: UserData) => {
     this.id = userData.id;
@@ -34,6 +34,19 @@ class UserStore implements UserData {
     this.type = userData.type;
     this.avatar = userData.avatar;
     this.phoneNumber = userData.phoneNumber;
+  };
+
+  getUserData = () => {
+    return {
+      id: this.id,
+      email: this.email,
+      firstName: this.firstName,
+      middleName: this.middleName,
+      lastName: this.lastName,
+      type: this.type,
+      avatar: this.avatar,
+      phoneNumber: this.phoneNumber,
+    };
   };
 }
 

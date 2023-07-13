@@ -12,7 +12,8 @@ import { updateUserPassword } from '../../graphql/mutations/updateUserPassword';
 import { diff } from 'deep-object-diff';
 
 export const ProfilePage = observer(() => {
-  const { avatar, email, firstName, lastName, middleName, phoneNumber, id } = UserStore;
+  const { avatar, email, firstName, lastName, middleName, phoneNumber, id } =
+    UserStore.getUserData();
 
   const [form, setForm] = useState({
     avatar,
@@ -30,8 +31,9 @@ export const ProfilePage = observer(() => {
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [isFormPasswordChanged, setIsFormPasswordChanged] = useState(false);
 
-  const onInput = (event) => {
-    const newForm = { ...form, [event.target.name]: event.target.value };
+  const onInput = (event: InputEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
+    const newForm = { ...form, [name]: value };
     setForm(newForm);
 
     const diffResult = diff({ avatar, firstName, lastName, middleName, phoneNumber }, newForm);
@@ -43,23 +45,22 @@ export const ProfilePage = observer(() => {
     }
   };
 
-  const onPasswordInput = (event) => {
+  const onPasswordInput = (event: InputEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
+
     setPasswordForm({
       ...passwordForm,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
 
-    if (
-      event.target.value === '' &&
-      (passwordForm.currentPassword === '' || passwordForm.newPassword === '')
-    ) {
+    if (value === '' && (passwordForm.currentPassword === '' || passwordForm.newPassword === '')) {
       setIsFormPasswordChanged(false);
     } else {
       setIsFormPasswordChanged(true);
     }
   };
 
-  const onButtonClick = async (event) => {
+  const onButtonClick = async (event: Event) => {
     event.preventDefault();
 
     graphQLClient
@@ -74,8 +75,9 @@ export const ProfilePage = observer(() => {
       .catch((e) => console.error('[Update user]', e));
   };
 
-  const onSaveNewPassword = (event) => {
+  const onSaveNewPassword = (event: Event) => {
     event.preventDefault();
+
     graphQLClient
       .request(updateUserPassword, {
         input: {

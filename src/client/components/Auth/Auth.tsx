@@ -1,20 +1,22 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import { graphQLClient } from "../../helpers/graphQlClient";
-import { signInUser } from "../../graphql/mutations/signInUser";
-import { setCookie } from "../../helpers/cookies";
-import AuthStore from "../../store/authStore";
-import { useNavigate } from "react-router-dom";
-import classes from "./Auth.module.scss";
-import { Button } from "../CommonComponents/Button/Button";
-import { Input } from "../CommonComponents/Input/Input";
+import React, { FormEvent, useEffect, useState } from 'react';
+import { graphQLClient } from '../../helpers/graphQlClient';
+import { signInUser } from '../../graphql/mutations/signInUser';
+import { setCookie } from '../../helpers/cookies';
+import AuthStore from '../../store/authStore';
+import { useNavigate } from 'react-router-dom';
+import classes from './Auth.module.scss';
+import { Button } from '../CommonComponents/Button/Button';
+import { Input } from '../CommonComponents/Input/Input';
+import userStore from '../../store/userStore';
+import { getMe } from '../../graphql/queries/getMe';
 
 export const Auth = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: '', password: '' });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/");
+    navigate('/');
   }, [navigate]);
 
   const onInput = (event: FormEvent) => {
@@ -35,8 +37,20 @@ export const Auth = () => {
 
       const { id, token } = signIn;
 
-      setCookie("authorization", token.hash);
+      setCookie('authorization', token.hash);
       logIn(token.hash, id);
+
+      graphQLClient
+        .request(getMe)
+        .then(({ me }) => {
+          const { id, ...rest } = me;
+          const userData = { ...rest, id };
+
+          userStore.setUserData(userData);
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     } catch (e) {
       console.error(e);
     }
@@ -46,25 +60,25 @@ export const Auth = () => {
       <div className={classes.FormContainer}>
         <h1>Авторизация</h1>
 
-        <form action="src/client/pages/authPage/AuthPage#">
+        <form action='src/client/pages/authPage/AuthPage#'>
           <Input
             onInput={onInput}
-            type="email"
-            placeholder="E-mail"
-            name="email"
+            type='email'
+            placeholder='E-mail'
+            name='email'
             value={form.email}
           />
 
           <Input
             onInput={onInput}
-            type="password"
-            placeholder="Пароль"
-            name="password"
+            type='password'
+            placeholder='Пароль'
+            name='password'
             value={form.password}
           />
 
           <div>
-            <Button onClick={onButtonClick} text="Войти" />
+            <Button onClick={onButtonClick} text='Войти' />
           </div>
         </form>
       </div>

@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom";
-import { AdminRoutes } from "./adminRoutes";
-import { TeacherRoutes } from "./teacherRoutes";
-import { PupilRoutes } from "./pupilRoutes";
-import { ParentRoutes } from "./parentRoutes";
-import { AuthPage } from "../pages/authPage/AuthPage";
-import UserStore from "../store/userStore";
+import { Routes, Route } from 'react-router-dom';
+import { AdminRoutes } from './adminRoutes';
+import { TeacherRoutes } from './teacherRoutes';
+import { PupilRoutes } from './pupilRoutes';
+import { ParentRoutes } from './parentRoutes';
+import { AuthPage } from '../pages/authPage/AuthPage';
+import UserStore from '../store/userStore';
 
 const routesMapping = {
   admin: () => <AdminRoutes />,
@@ -13,8 +13,8 @@ const routesMapping = {
   parent: () => <ParentRoutes />,
 };
 
-export const useRoutes = (isAuthenticated: boolean) => {
-  const { type }: { type: string } = UserStore;
+export const useRoutes = (isAuthenticated: boolean, userStore: typeof UserStore) => {
+  const { type }: { type: string } = userStore.getUserData();
 
   if (isAuthenticated) {
     return routesMapping[type as keyof typeof routesMapping]();
@@ -22,8 +22,8 @@ export const useRoutes = (isAuthenticated: boolean) => {
 
   return (
     <Routes>
-      <Route path="/" element={<AuthPage />} />
-      <Route path="*" element={<AuthPage />} />
+      <Route path='/' element={<AuthPage />} />
+      <Route path='*' element={<AuthPage />} />
     </Routes>
   );
 };
