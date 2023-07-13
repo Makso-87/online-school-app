@@ -4,8 +4,8 @@ import userStore from '../../store/userStore';
 import school_logo from '../../images/icons/school_logo.png';
 import { allowedSideBarListItems } from './allowedSideBarListItems';
 
-export const SideBar = (props) => {
-  const { type } = userStore;
+export const SideBar = () => {
+  const { type } = userStore.getUserData();
 
   const setActiveClass = ({ isActive }) => {
     return isActive ? classes.Active : '';

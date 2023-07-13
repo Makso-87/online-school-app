@@ -2,11 +2,12 @@ import { getCookie } from '../helpers/cookies';
 import { useEffect, useState } from 'react';
 import { graphQLClient } from '../helpers/graphQlClient';
 import { getMe } from '../graphql/queries/getMe';
-import UserStore from '../store/userStore';
-import AuthStore from '../store/authStore';
+import userStore from '../store/userStore';
+import authStore from '../store/authStore';
 
 export const useCheckAuth = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const authorization = getCookie('authorization');
@@ -18,8 +19,8 @@ export const useCheckAuth = () => {
           const { id, ...rest } = me;
           const userData = { ...rest, id };
 
-          UserStore.setUserData(userData);
-          AuthStore.logIn(authorization, id);
+          userStore.setUserData(userData);
+          authStore.logIn(authorization, id);
           setIsAuthorized(true);
         })
         .catch((e) => {
@@ -27,7 +28,9 @@ export const useCheckAuth = () => {
           console.error(e);
         });
     }
+
+    setIsReady(true);
   }, []);
 
-  return isAuthorized;
+  return { isAuthorized, isReady };
 };
