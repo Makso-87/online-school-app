@@ -21,6 +21,9 @@ import { CreateDiary } from '../pages/diary/createDiary/CreateDiary';
 import { Class } from '../pages/classes/Class/Class';
 import { Classes } from '../pages/classes/Classes';
 import { CreateClass } from '../pages/classes/CreateClass/CreateClass';
+import { Lessons } from '../pages/lessons/Lessons';
+import { CreateLesson } from '../pages/lessons/createLesson/CreateLesson';
+import { Lesson } from '../pages/lessons/lesson/Lesson';
 
 export const AdminRoutes = () => {
   const navigate = useNavigate();
@@ -45,6 +48,9 @@ export const AdminRoutes = () => {
         <Route path='admin/classes' element={<Classes />} />
         <Route path='admin/classes/createClass' element={<CreateClass />} />
         <Route path='admin/classes/class/:id' element={<Class />} />
+        <Route path='admin/lessons' element={<Lessons />} />
+        <Route path='admin/lessons/createLesson' element={<CreateLesson />} />
+        <Route path='admin/lessons/lesson/:id' element={<Lesson />} />
         <Route path='admin/schedules' element={<Schedules />} />
         <Route path='admin/schedules/createSchedule' element={<CreateSchedule />} />
         <Route path='admin/schedules/schedule/:id' element={<Schedule />} />
